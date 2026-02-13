@@ -11,14 +11,14 @@ import (
 
 func TestBuildResourceNode(t *testing.T) {
 	tests := []struct {
-		name           string
-		obj            *unstructured.Unstructured
-		wantKind       string
-		wantName       string
-		wantNamespace  string
-		wantStatus     string
-		wantExtName    string
-		wantHasAge     bool
+		name          string
+		obj           *unstructured.Unstructured
+		wantKind      string
+		wantName      string
+		wantNamespace string
+		wantStatus    string
+		wantExtName   string
+		wantHasAge    bool
 	}{
 		{
 			name: "healthy XR with external name",
@@ -197,9 +197,9 @@ func TestGetResourceRef(t *testing.T) {
 
 func TestFlatten(t *testing.T) {
 	tests := []struct {
-		name     string
-		root     *ResourceNode
-		wantLen  int
+		name      string
+		root      *ResourceNode
+		wantLen   int
 		wantOrder []string // expected names in DFS order
 	}{
 		{

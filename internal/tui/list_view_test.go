@@ -7,7 +7,6 @@ import (
 	"github.com/devriles/xpctl/internal/model"
 )
 
-
 func TestBuildRows(t *testing.T) {
 	tests := []struct {
 		name       string
