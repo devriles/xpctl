@@ -513,4 +513,3 @@ func computeStats(nodes []*ResourceNode) model.TreeStats {
 	}
 	return stats
 }
-

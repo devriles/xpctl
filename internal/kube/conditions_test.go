@@ -412,10 +412,10 @@ func TestStringField(t *testing.T) {
 		want string
 	}{
 		{"name", "test"},
-		{"count", ""},     // not a string
-		{"nested", ""},    // not a string
-		{"missing", ""},   // not present
-		{"empty", ""},     // empty string
+		{"count", ""},   // not a string
+		{"nested", ""},  // not a string
+		{"missing", ""}, // not present
+		{"empty", ""},   // empty string
 	}
 
 	for _, tt := range tests {
