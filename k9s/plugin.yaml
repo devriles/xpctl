@@ -1,0 +1,14 @@
+plugins:
+  xpctl:
+    shortCut: Shift-T
+    description: "Inspect Crossplane composition pipeline"
+    scopes:
+      - all
+    command: xpctl
+    args:
+      - "$RESOURCE_NAME"
+      - "$NAME"
+      - "-n"
+      - "$NAMESPACE"
+    background: false
+    confirm: false

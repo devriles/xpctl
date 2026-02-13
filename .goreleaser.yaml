@@ -1,0 +1,56 @@
+version: 2
+
+project_name: xpctl
+
+before:
+  hooks:
+    - go mod tidy
+    - go vet ./...
+
+builds:
+  - main: .
+    binary: xpctl
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - "^chore:"
+
+brews:
+  - repository:
+      owner: devriles
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/devriles/xpctl"
+    description: "Interactive TUI for visualizing Crossplane composition pipelines"
+    license: "Apache-2.0"
+    install: |
+      bin.install "xpctl"
+    test: |
+      system "#{bin}/xpctl", "--version"

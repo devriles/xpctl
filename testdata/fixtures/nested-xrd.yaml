@@ -1,0 +1,23 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xnopsubnets.test.xpctl.io
+spec:
+  group: test.xpctl.io
+  names:
+    kind: XNopSubnet
+    plural: xnopsubnets
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                zone:
+                  type: string
+                  default: us-east-1a

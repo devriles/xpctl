@@ -1,0 +1,43 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xnopapp-composition
+spec:
+  compositeTypeRef:
+    apiVersion: test.xpctl.io/v1alpha1
+    kind: XNopApp
+  mode: Pipeline
+  pipeline:
+    - step: create-nop-resources
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: nop-resource-one
+            base:
+              apiVersion: nop.crossplane.io/v1alpha1
+              kind: ClusterNopResource
+              spec:
+                forProvider:
+                  conditionAfter:
+                    - time: 0s
+                      conditionType: Ready
+                      conditionStatus: "True"
+                    - time: 0s
+                      conditionType: Synced
+                      conditionStatus: "True"
+          - name: nop-resource-two
+            base:
+              apiVersion: nop.crossplane.io/v1alpha1
+              kind: ClusterNopResource
+              spec:
+                forProvider:
+                  conditionAfter:
+                    - time: 0s
+                      conditionType: Ready
+                      conditionStatus: "True"
+                    - time: 0s
+                      conditionType: Synced
+                      conditionStatus: "True"

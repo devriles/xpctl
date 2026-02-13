@@ -1,0 +1,8 @@
+apiVersion: test.xpctl.io/v1alpha1
+kind: XNopApp
+metadata:
+  name: test-app-unhealthy
+spec:
+  compositionRef:
+    name: xnopapp-unhealthy-composition
+  region: us-east-1

@@ -1,0 +1,43 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xnopapp-unhealthy-composition
+spec:
+  compositeTypeRef:
+    apiVersion: test.xpctl.io/v1alpha1
+    kind: XNopApp
+  mode: Pipeline
+  pipeline:
+    - step: create-nop-resources
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: healthy-resource
+            base:
+              apiVersion: nop.crossplane.io/v1alpha1
+              kind: ClusterNopResource
+              spec:
+                forProvider:
+                  conditionAfter:
+                    - time: 0s
+                      conditionType: Ready
+                      conditionStatus: "True"
+                    - time: 0s
+                      conditionType: Synced
+                      conditionStatus: "True"
+          - name: broken-resource
+            base:
+              apiVersion: nop.crossplane.io/v1alpha1
+              kind: ClusterNopResource
+              spec:
+                forProvider:
+                  conditionAfter:
+                    - time: 0s
+                      conditionType: Synced
+                      conditionStatus: "False"
+                    - time: 0s
+                      conditionType: Ready
+                      conditionStatus: "False"

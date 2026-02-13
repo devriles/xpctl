@@ -1,0 +1,14 @@
+# Build artifacts
+bin/
+dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+
+# Debug logs
+*.log

@@ -1,0 +1,23 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xnopapp-nested-composition
+spec:
+  compositeTypeRef:
+    apiVersion: test.xpctl.io/v1alpha1
+    kind: XNopApp
+  mode: Pipeline
+  pipeline:
+    - step: create-sub-xr
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: nested-subnet
+            base:
+              apiVersion: test.xpctl.io/v1alpha1
+              kind: XNopSubnet
+              spec:
+                zone: us-east-1a

@@ -1,0 +1,9 @@
+apiVersion: test.xpctl.io/v1alpha1
+kind: NopApp
+metadata:
+  name: test-app-claim
+  namespace: default
+spec:
+  compositionRef:
+    name: xnopapp-composition
+  region: us-west-2

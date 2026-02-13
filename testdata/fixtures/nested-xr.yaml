@@ -1,0 +1,8 @@
+apiVersion: test.xpctl.io/v1alpha1
+kind: XNopApp
+metadata:
+  name: test-app-nested
+spec:
+  compositionRef:
+    name: xnopapp-nested-composition
+  region: us-east-1
