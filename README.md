@@ -31,7 +31,7 @@ Navigate composite resource hierarchies, see synced/ready status at a glance, dr
 ### Homebrew
 
 ```bash
-brew install devriles/tap/xpctl
+brew install --cask devriles/tap/xpctl
 ```
 
 ### Go

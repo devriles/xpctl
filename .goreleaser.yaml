@@ -23,11 +23,13 @@ builds:
       - -s -w -X main.version={{.Version}}
 
 archives:
-  - format: tar.gz
+  - formats:
+      - tar.gz
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
 
 checksum:
   name_template: "checksums.txt"
@@ -41,16 +43,13 @@ changelog:
       - "^ci:"
       - "^chore:"
 
-brews:
-  - repository:
+homebrew_casks:
+  - binaries:
+      - xpctl
+    repository:
       owner: devriles
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
-    directory: Formula
+    directory: Casks
     homepage: "https://github.com/devriles/xpctl"
     description: "Interactive TUI for visualizing Crossplane composition pipelines"
-    license: "Apache-2.0"
-    install: |
-      bin.install "xpctl"
-    test: |
-      system "#{bin}/xpctl", "--version"
